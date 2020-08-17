@@ -1,7 +1,8 @@
 import discord
+import random
 from discord.ext import commands
 
-class Points(commands.Cog):
+class Poll(commands.Cog):
     
     def __init__(self, bot):
         self.bot = bot
@@ -9,10 +10,5 @@ class Points(commands.Cog):
 
 
 
-
-
-
-
-
 def setup(bot):
-    bot.add_cog(Points(bot))
+    bot.add_cog(Poll(bot))
