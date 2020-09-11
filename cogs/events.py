@@ -49,6 +49,9 @@ class Events(commands.Cog):
     #Error Statement
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.CheckFailure):
+            await ctx.send("You don't have permission to use this command!")
+            return
         print(error)
         await ctx.send("ERROR: I cannot comprehand your nonsense") 
 

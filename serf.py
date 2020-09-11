@@ -27,5 +27,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
-#LAST - MUSt BE thE LAST THING DUMB BITCH
 bot.run(TOKEN)
