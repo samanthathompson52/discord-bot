@@ -3,6 +3,13 @@ import random
 from discord.ext import commands
 from discord.ext.commands import has_permissions, CheckFailure
 
+def isSub(roles):
+    for currRole in roles:
+        print(currRole)
+        if(currRole.name == "Subscriber"):
+            return True
+    return False
+
 class Queue(commands.Cog):
     
     def __init__(self, bot):
@@ -18,7 +25,7 @@ class Queue(commands.Cog):
         elif len(self.queue) == 0:
             msg = "There is no one in the queue :("
         else:
-            msg = ', '.join([str(x) for x in self.queue])
+            msg = ', '.join([str(x[0].name) for x in self.queue])
         await ctx.send(msg)
 
     @queue.command(name = 'start')
@@ -42,31 +49,43 @@ class Queue(commands.Cog):
     @queue.command(name = 'pjoin')
     @commands.has_role('Ya girl')
     async def pjoin_cmd(self, ctx):
+        author = (ctx.message.author, isSub(ctx.message.author.roles))
         if self.queue == None:
             msg = ('Sorry! There is currently no active queue to join :(')
         else:
-            self.queue.insert(0, "Samaara")
+            self.queue.insert(0, author)
             msg = "Samaara has joined the queue!"
         await ctx.send(msg)
 
     @queue.command(name = 'join')
-    async def join_cmd(self, ctx):
+    async def join_cmd(self, ctx):        
+        author = (ctx.message.author, isSub(ctx.message.author.roles))
         if self.queue == None:
             msg = ('Sorry! There is currently no active queue to join :(')
-        elif ctx.message.author.name in self.queue:
+        elif author in self.queue:
             msg = ('You are already in line! Use !queue or !q to view the current queue.')
-        else:
-            self.queue.append(ctx.message.author.name)
+        else: 
+            if author[1] == False:
+                self.queue.append(author)
+            else:
+                i=0
+                while i<len(self.queue) and self.queue[i][1] == True:
+                    i += 1
+                self.queue.insert(i, author)
+
             msg = "You have succesfully joined the queue! Please wait untill you are told to join the current game. Use !q or !queue to view the queue!"
         await ctx.send(msg)
 
     @queue.command(name = 'leave')
     async def leave_cmd(self, ctx):
+        author = (ctx.message.author, isSub(ctx.message.author.roles))
         if self.queue == None:
-            msg = (f'Huh, {ctx.message.author.name} is trying to leave a queue when a queue does not even exist!')
+            msg = (f'Huh, {author[0].name} is trying to leave a queue when a queue does not even exist!')
+        elif author in self.queue:
+            self.queue.remove(author)
+            msg = (f'{author[0].name} has left the queue.')
         else:
-            self.queue.remove(ctx.message.author.name)
-            msg = (f'{ctx.message.author.name} has left the queue.')
+            msg = "You were never in the queue in the first place!"
         await ctx.send(msg)
 
     @queue.command(name = 'kick')
@@ -74,25 +93,27 @@ class Queue(commands.Cog):
     async def kick_cmd(self, ctx, kickee: str = ""):
         if kickee == "":
             msg = ("Make sure to enter someone to kick! Use the command like this: !q kick Samaara")
-        elif kickee not in self.queue:
-            self.queue.remove(ctx.message.author.name)
+        else:
+            for i in range(len(self.queue)):
+                if self.queue[i][0].name == kickee:
+                    msg = (f'{kickee} has been kicked from queue.') 
+                    await ctx.send(msg)
+                    return
             msg = ("That person is not currently in the queue.")
-        elif kickee in self.queue:
-            self.queue.remove(kickee)
-            msg = (f'{kickee} has been kicked from queue.')
+            
         await ctx.send(msg)
 
-    @queue.command(name = 'add')
-    @commands.has_role('Moderator')
-    async def add_cmd(self, ctx, addee: str = ""):
-        if addee == "":
-            msg = ("Make sure to enter someone to Add! Use the command like this: !q add Samaara")
-        elif addee not in self.queue:
-            self.queue.append(addee)
-            msg = (f'{addee} had been added to the queue! Thanks {ctx.message.author.name}.')
-        elif addee in self.queue:
-            msg = (f'{addee} is already in the que.')
-        await ctx.send(msg)
+    # @queue.command(name = 'add')
+    # @commands.has_role('Moderator')
+    # async def add_cmd(self, ctx, addee: str = ""):
+    #     if addee == "":
+    #         msg = ("Make sure to enter someone to Add! Use the command like this: !q add Samaara")
+    #     elif addee not in self.queue:
+    #         self.queue.append(addee)
+    #         msg = (f'{addee} had been added to the queue! Thanks {ctx.message.author.name}.')
+    #     elif addee in self.queue:
+    #         msg = (f'{addee} is already in the que.')
+    #     await ctx.send(msg)
 
     @queue.command(name = 'nextgame')
     @commands.has_role('Moderator')
