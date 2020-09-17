@@ -37,20 +37,20 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         randomWelcome = [
-            f'Welcome to the server {member.name}!',
-            f'{member.name} has joined the server!',
-            f'{member.name} is new to the server give them a hello!',
-            f'Welcome to the best server in all the land {member.name}!',
-            f'Welcome to the SamFam {member.name}!',
-            f'Welcome {member.name}! Thanks for joining!',
-            f'Welcome {member.name}! I am glad you made the best choice and joined this discord',
-            f'Welcome {member.name}, enjoy your stay!',
-            f'Welcome {member.name}! Did you bring any food?',
-            f'A wild {member.name} has appeared!',
-            f'{member.name} has stumbled into the discord! Are they lost? No? OH - WELCOME!"',
-            f'Hello {member.name}! Are you a new friend for Loki?',
-            f'Hello There {member.name}! Just ignore the moderators trapped in the basement :)',
-            f'{member.name} is new here! Welcome!'
+            f'Welcome to the server @{member.name}!',
+            f'@{member.name} has joined the server!',
+            f'@{member.name} is new to the server give them a hello!',
+            f'Welcome to the best server in all the land @{member.name}!',
+            f'Welcome to the SamFam @{member.name}!',
+            f'Welcome @{member.name}! Thanks for joining!',
+            f'Welcome @{member.name}! I am glad you made the best choice and joined this discord',
+            f'Welcome @{member.name}, enjoy your stay!',
+            f'Welcome @{member.name}! Did you bring any food?',
+            f'A wild @{member.name} has appeared!',
+            f'@{member.name} has stumbled into the discord! Are they lost? No? OH - WELCOME!"',
+            f'Hello @{member.name}! Are you a new friend for Loki?',
+            f'Hello There @{member.name}! Just ignore the moderators trapped in the basement :)',
+            f'@{member.name} is new here! **Welcome!**'
         ]
 
         msgWelcome = random.choice(randomWelcome)
@@ -64,7 +64,7 @@ class Events(commands.Cog):
             await ctx.send("You don't have permission to use this command!")
             return
         print(error)
-        await ctx.send("ERROR: I 2cannot comprehand your nonsense") 
+        await ctx.send("ERROR: I cannot comprehand your nonsense") 
 
 def setup(bot):
     bot.add_cog(Events(bot))
