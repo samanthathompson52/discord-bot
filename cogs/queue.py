@@ -96,6 +96,7 @@ class Queue(commands.Cog):
         else:
             for i in range(len(self.queue)):
                 if self.queue[i][0].name == kickee:
+                    self.queue.remove(self.queue[i])
                     msg = (f'{kickee} has been kicked from queue.') 
                     await ctx.send(msg)
                     return
@@ -120,10 +121,21 @@ class Queue(commands.Cog):
     async def end_cmd(self, ctx):
         i = 0
         while i < int(self.playerNumber) and i < len(self.queue):
-            if self.queue[i] == 'Samaara':
+            if self.queue[i][0].name == 'Samaara':
                 i += 1
             else:
                 self.queue.pop(i)
+
+    @queue.command(name = 'modhelp')
+    @commands.has_role('Moderator')
+    async def end_cmd(self, ctx):
+        msg = "https://imgur.com/gallery/AOt8ABK"
+        await ctx.send(msg)
+
+    @queue.command(name = 'help')
+    async def end_cmd(self, ctx):
+        msg = "https://imgur.com/h77HQS3"
+        await ctx.send(msg)
 
 def setup(bot):
     bot.add_cog(Queue(bot))
