@@ -118,7 +118,7 @@ class Queue(commands.Cog):
 
     @queue.command(name = 'nextgame')
     @commands.has_role('Moderator')
-    async def end_cmd(self, ctx):
+    async def nxtgame_cmd(self, ctx):
         i = 0
         while i < int(self.playerNumber) and i < len(self.queue):
             if self.queue[i][0].name == 'Samaara':
@@ -128,12 +128,12 @@ class Queue(commands.Cog):
 
     @queue.command(name = 'modhelp')
     @commands.has_role('Moderator')
-    async def end_cmd(self, ctx):
+    async def modhelp_cmd(self, ctx):
         msg = "https://imgur.com/gallery/AOt8ABK"
         await ctx.send(msg)
 
     @queue.command(name = 'help')
-    async def end_cmd(self, ctx):
+    async def help_cmd(self, ctx):
         msg = "https://imgur.com/h77HQS3"
         await ctx.send(msg)
 
