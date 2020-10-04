@@ -1,3 +1,6 @@
+#Reaction roles based on what games users in the discord server play
+#Current games supported: Super_Smash_Bros, Among_Us, Pokemon, Fall_Guys, Animal_Crossing, Valorant, League_of_Legends
+
 import discord
 import os
 from discord.ext import commands
@@ -14,6 +17,7 @@ class GameRoles(commands.Cog):
         self.bot = bot
         self._last_member = None
 
+    #Clears reactions that are not permitted
     @commands.Cog.listener()
     async def on_ready(self):
         validEmojis = GAME_EMOJIS
@@ -28,6 +32,7 @@ class GameRoles(commands.Cog):
             except:
                 await message.clear_reaction(i.emoji) 
 
+    #Assigns a game role based upon what reactions the user selects
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         messageID = payload.message_id
@@ -53,6 +58,7 @@ class GameRoles(commands.Cog):
                 if member is not None:
                     await member.add_roles(role)
 
+    #Removes the role if user unreacts 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload):
         if payload.message_id == GAME_ROLE_MESSAGE:

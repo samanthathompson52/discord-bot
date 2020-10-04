@@ -15,7 +15,7 @@ class Events(commands.Cog):
         self.bot = bot
         self._last_member = None
 
-    #Stuff that happens when the bot launches
+    #Items that occur when the bot is first launched
     @commands.Cog.listener()
     async def on_ready(self):
         #guild = discord.utils.find(lambda g: g.id == GUILD, client.guilds)
@@ -32,7 +32,7 @@ class Events(commands.Cog):
         members = '\n - '.join([member.name for member in guild.members])
 
         
-
+    #Commented out to work on compatibility with a secondary bot
     #When new member joins the server
     # @commands.Cog.listener()
     # async def on_member_join(self, member):
@@ -64,7 +64,6 @@ class Events(commands.Cog):
             await ctx.send("You don't have permission to use this command!")
             return
         print(error)
-        await ctx.send("ERROR: I cannot comprehand your nonsense") 
 
 def setup(bot):
     bot.add_cog(Events(bot))

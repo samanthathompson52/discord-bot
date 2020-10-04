@@ -1,3 +1,8 @@
+#Used to allow users and admins to create polls for everyone to vote on. 
+#Key functions:
+#Admins - create official poles that mention roles
+#Members - Fun polls that are timed and get removed after x amount of time after completion. 
+
 import discord
 import random
 from discord.ext import commands

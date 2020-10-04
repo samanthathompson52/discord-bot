@@ -1,3 +1,6 @@
+#Creates a new general member role users get by reacting to a message
+#Serves as an agreement to the established rules in the discord server
+
 import discord
 import os
 from discord.ext import commands
@@ -14,6 +17,7 @@ class Roles(commands.Cog):
         self.bot = bot
         self._last_member = None
 
+    #Removes any reactions that are not permitted
     @commands.Cog.listener()
     async def on_ready(self):
         validEmojis = VALID_ROLE_EMOJIS
@@ -28,6 +32,7 @@ class Roles(commands.Cog):
             except:
                 await message.clear_reaction(i.emoji) 
 
+    #Adds the member role upon reaction the the rules and information message
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         messageID = payload.message_id
@@ -53,6 +58,7 @@ class Roles(commands.Cog):
                 if member is not None:
                     await member.add_roles(role)
 
+    #Removes the role upon user removing their reaction to the rules and information message. 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload):
         if payload.message_id == ROLE_MESSAGE:

@@ -1,3 +1,5 @@
+#Contains dice roll and what are the odds functions
+
 import discord
 import random
 from discord.ext import commands
@@ -30,6 +32,7 @@ class Gambling(commands.Cog):
         dice = str(random.choice(range(1, int(number_of_sides) + 1)))
         await ctx.send(dice) 
 
+    #What are the odds
     @commands.command(name='wato', aliases = ['whataretheodds','odds'], help='What are the odds? Will you win against the bot? To use this command input as the following: !wato (your number) (Odds)')
     async def wato(self, ctx, userNum: int, odds: int):
         rng = random.choice(range(1, int(odds) + 1))
