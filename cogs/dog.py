@@ -12,7 +12,7 @@ class Dog(commands.Cog):
 
 #Pet Command
 #Sends a random message to the user related to a dog being pet
- @commands.command(name='pet', help='Pet the Loki man!')
+    @commands.command(name='pet', help='Pet the Loki man!')
     async def roll(self, member):
         randomPet = [
              f'Ooooo that is the spot {member.name}!',
@@ -28,7 +28,7 @@ class Dog(commands.Cog):
 
 #Fetch command for user interaction with Loki. Key words trigger different reactions.
 #Current keywords: bone, steak, gift, ball, cardboard, money, Samaara
- @commands.command(name='fetch', help='Tell Loki to fetch an item!')
+    @commands.command(name='fetch', help='Tell Loki to fetch an item!')
     async def roll(self, ctx, item = ""):
         if item == "bone":
             msg = "🦴       Here. Only because I want it for myself mwahahahaaha"
