@@ -10,6 +10,18 @@ class Dog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
+        self.messageMap = {'bone': "🦴       Here. Only because I want it for myself mwahahahaaha",
+                        'steak': "🥩       Here. Only because I want it for myself mwahahahaaha",
+                        'gift': "🎁       Here. It's literally an empty box so I have no idea why you want this thing.",
+                        'ball': "⚾       OH BOY! YOU GONNA PLAY WITH ME?",
+                        'cardboard': "📦       REALLY? Don't be a snitch and tell my momma. Tasty Tasty cardboard....",
+                        'card board': "📦       REALLY? Don't be a snitch and tell my momma. Tasty Tasty cardboard....",
+                        'money': "💰💵💰💵💰      I gotchu bro",
+                        'Samaara': "You can't summon my mother like that!",
+                        'samaara': "You can't summon my mother like that!",
+                        'Sam': "You can't summon my mother like that!",
+                        'sam': "You can't summon my mother like that!"  }    
+            
 
 #Pet Command
 #Sends a random message to the user related to a dog being pet
@@ -31,21 +43,8 @@ class Dog(commands.Cog):
 #Current keywords: bone, steak, gift, ball, cardboard, money, Samaara
     @commands.command(name='fetch', help='Tell Loki to fetch an item!')
     async def fetch(self, ctx, item = ""):
-        if item == "bone":
-            msg = "🦴       Here. Only because I want it for myself mwahahahaaha"
-        elif item == "steak":
-            msg = "🥩       Here. Only because I want it for myself mwahahahaaha"
-        elif item == "gift":
-            msg = "🎁       Here. It's literally an empty box so I have no idea why you want this thing."
-        elif item == "ball":
-            msg = "⚾       OH BOY! YOU GONNA PLAY WITH ME?"
-        elif item == "cardboard" or item == "card board":
-            msg = "📦       REALLY? Don't be a snitch and tell my momma. Tasty Tasty cardboard...."
-        elif item == "money":
-            msg = "💰💵💰💵💰      I gotchu bro"
-        elif item == "Samaara" or item == "samaara" or item == "Sam" or item == "sam":
-            msg = "You can't summon my mother like that!"
-        else:
+        msg = self.messageMap.get(item, default=False)
+        if msg == False:
             randomFetch = [
                 "I ain't getting that",
                 "You really think I care about that?",
@@ -57,7 +56,6 @@ class Dog(commands.Cog):
             ]
             msg = random.choice(randomFetch)
         await ctx.channel.send(msg)
-
 
 def setup(bot):
     bot.add_cog(Dog(bot))
