@@ -25,7 +25,6 @@ class Dog(commands.Cog):
                         'wine': "🍷 No! That's for Momma only!",
                         'cable': "No! Momma gets angry when I chew her cables. 🐶",
                         'wire': "No! Momma gets angry when I chew her wires. 🐶",
-                        'knife': "🔪 I, Loki, offer you this knife on the condition you use it on Kloud.",
                         'shiken': "🐔 Here. Not sure why you had to misspell it, weirdo.",
                         'chicken': "🐔 Here. Glad you spelled it correctly.",
                         'skunk': "🦨 No thanks!! Hope I never run into one of those!",
