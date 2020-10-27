@@ -20,7 +20,16 @@ class Dog(commands.Cog):
                         'Samaara': "You can't summon my mother like that!",
                         'samaara': "You can't summon my mother like that!",
                         'Sam': "You can't summon my mother like that!",
-                        'sam': "You can't summon my mother like that!"  }    
+                        'sam': "You can't summon my mother like that!" ,
+                        'uranium': "☢️ Why do you need this? Is it for the Delorean?",
+                        'wine': "🍷 No! That's for Momma only!",
+                        'cable': "No! Momma gets angry when I chew her cables. 🐶",
+                        'wire': "No! Momma gets angry when I chew her wires. 🐶",
+                        'knife': "🔪 I, Loki, offer you this knife on the condition you use it on Kloud.",
+                        'shiken': "🐔 Here. Not sure why you had to misspell it, weirdo.",
+                        'chicken': "🐔 Here. Glad you spelled it correctly.",
+                        'skunk': "🦨 No thanks!! Hope I never run into one of those!",
+                        'bath': "🛀 No I don't want to!" }    
             
 
 #Pet Command
