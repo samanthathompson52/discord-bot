@@ -37,10 +37,11 @@ class Roles(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         messageID = payload.message_id
         validEmojis = VALID_ROLE_EMOJIS
-
+        print(messageID)
         if messageID == ROLE_MESSAGE:
             guildID = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guildID, self.bot.guilds)
+            print(guild)
             channel = discord.utils.find(lambda g: g.id == payload.channel_id, guild.channels)
             message = await channel.fetch_message(messageID)
             role = discord.utils.find(lambda m: m.name == payload.emoji.name, guild.roles)
@@ -54,7 +55,7 @@ class Roles(commands.Cog):
                     await message.add_reaction(emoji)
 
             if role is not None:
-                member = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+                member = guild.get_member(payload.user_id)
                 if member is not None:
                     await member.add_roles(role)
 
@@ -67,7 +68,8 @@ class Roles(commands.Cog):
             role = discord.utils.find(lambda r : r.name == payload.emoji.name, guild.roles)
             if role is not None:
                 member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
-                await member.remove_roles(role)
+                if member is not None:
+                    await member.remove_roles(role)
             
 def setup(bot):
     bot.add_cog(Roles(bot))
