@@ -37,11 +37,9 @@ class Roles(commands.Cog):
     async def on_raw_reaction_add(self, payload):
         messageID = payload.message_id
         validEmojis = VALID_ROLE_EMOJIS
-        print(messageID)
         if messageID == ROLE_MESSAGE:
             guildID = payload.guild_id
             guild = discord.utils.find(lambda g: g.id == guildID, self.bot.guilds)
-            print(guild)
             channel = discord.utils.find(lambda g: g.id == payload.channel_id, guild.channels)
             message = await channel.fetch_message(messageID)
             role = discord.utils.find(lambda m: m.name == payload.emoji.name, guild.roles)

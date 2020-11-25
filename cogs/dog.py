@@ -51,7 +51,7 @@ class Dog(commands.Cog):
 #Current keywords: bone, steak, gift, ball, cardboard, money, Samaara
     @commands.command(name='fetch', help='Tell Loki to fetch an item!')
     async def fetch(self, ctx, item = ""):
-        msg = self.messageMap.get(item, default=False)
+        msg = self.messageMap.get(item, False)
         if msg == False:
             randomFetch = [
                 "I ain't getting that",
