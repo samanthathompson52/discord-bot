@@ -70,4 +70,4 @@ class ExtraRoles(commands.Cog):
                 await member.remove_roles(role)
             
 def setup(bot):
-    bot.add_cog(GameRoles(bot))
+    bot.add_cog(ExtraRoles(bot))
